@@ -12,16 +12,26 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   final _formKey = GlobalKey<FormState>();
+    static DateTime? _due_date = UserData.due_date;
+    static DateTime? _last_period = UserData.last_period;
+    static int _age = UserData.age;
+    static double _weight = UserData.weight;
+    static double _height = UserData.height;
+    // blood pressure = systolic/diastolic
+    static int _systolic_blood_pressure = UserData.systolic_blood_pressure;
+    static int _diastolic_blood_pressure = UserData.diastolic_blood_pressure; 
+    static int _sugar_level = UserData.sugar_level; // mg/DL
+    static int _stress_level = UserData.stress_level;
 
   Future<void> _selectDueDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: UserData.due_date == null ? DateTime.now() : UserData.due_date!,
+        initialDate: _due_date == null ? DateTime.now() : _due_date!,
         firstDate: DateTime(2020),
         lastDate: DateTime(2025));
     if (picked != null) {
       setState(() {
-        UserData.due_date = picked;
+        _due_date = picked;
       });
     }
   }
@@ -29,13 +39,13 @@ class _QuestionState extends State<Question> {
   Future<void> _selectLastPeriod(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: UserData.last_period == null ? DateTime.now() : UserData.last_period!,
+        initialDate: _last_period == null ? DateTime.now() : _last_period!,
         firstDate: DateTime(2020),
         lastDate: DateTime(2025));
     if (picked != null) {
       setState(() {
-        UserData.last_period = picked;
-        UserData.due_date = picked.add(const Duration(days: 280));
+        _last_period = picked;
+        _due_date = picked.add(const Duration(days: 280));
       });
     }
   }
@@ -58,9 +68,9 @@ class _QuestionState extends State<Question> {
                   labelText: 'Estimated Due Date',
                 ),
                 controller: TextEditingController(
-                  text: UserData.due_date == null
+                  text: _due_date == null
                       ? "Unset"
-                      : UserData.due_date.toString().substring(0, 10),
+                      : _due_date.toString().substring(0, 10),
                 ),
               ),
               const SizedBox(height: 10.0),
@@ -89,7 +99,7 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: UserData.height == 0 ? '' : UserData.height.toString(),
+                initialValue: _height == 0 ? '' : _height.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Age',
                 ),
@@ -110,7 +120,7 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    UserData.age = int.tryParse(value) == null
+                    _age = int.tryParse(value) == null
                         ? 0
                         : int.parse(value);
                   });
@@ -118,9 +128,9 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: UserData.height == 0 ? '' : UserData.height.toString(),
+                initialValue: _height == 0 ? '' : _height.toString(),
                 decoration: const InputDecoration(
-                  labelText: 'Height',
+                  labelText: 'Height (cm)',
                 ),
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
@@ -139,7 +149,7 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    UserData.height = double.tryParse(value) == null
+                    _height = double.tryParse(value) == null
                         ? 0
                         : double.parse(value);
                   });
@@ -147,9 +157,9 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: UserData.weight == 0 ? '' : UserData.weight.toString(),
+                initialValue: _weight == 0 ? '' : _weight.toString(),
                 decoration: const InputDecoration(
-                  labelText: 'Weight',
+                  labelText: 'Weight (kg)',
                 ),
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
@@ -168,7 +178,7 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    UserData.weight = double.tryParse(value) == null
+                    _weight = double.tryParse(value) == null
                         ? 0
                         : double.parse(value);
                   });
@@ -176,7 +186,7 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: UserData.systolic_blood_pressure == 0 ? '' : UserData.systolic_blood_pressure.toString(),
+                initialValue: _systolic_blood_pressure == 0 ? '' : _systolic_blood_pressure.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Systolic Blood Pressure (mmHg)',
                   hintText: 'Upper number',
@@ -198,7 +208,7 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    UserData.systolic_blood_pressure = int.tryParse(value) == null
+                    _systolic_blood_pressure = int.tryParse(value) == null
                         ? 0
                         : int.parse(value);
                   });
@@ -206,7 +216,7 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: UserData.diastolic_blood_pressure == 0 ? '' : UserData.diastolic_blood_pressure.toString(),
+                initialValue: _diastolic_blood_pressure == 0 ? '' : _diastolic_blood_pressure.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Diastolic Blood Pressure (mmHg)',
                   hintText: 'Lower number',
@@ -228,7 +238,7 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    UserData.diastolic_blood_pressure = int.tryParse(value) == null
+                    _diastolic_blood_pressure = int.tryParse(value) == null
                         ? 0
                         : int.parse(value);
                   });
@@ -236,7 +246,7 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: UserData.sugar_level == 0 ? '' : UserData.sugar_level.toString(),
+                initialValue: _sugar_level == 0 ? '' : _sugar_level.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Sugar Level (mg/DL)',
                 ),
@@ -257,7 +267,7 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    UserData.sugar_level = int.tryParse(value) == null
+                    _sugar_level = int.tryParse(value) == null
                         ? 0
                         : int.parse(value);
                   });
@@ -275,42 +285,42 @@ class _QuestionState extends State<Question> {
               RadioListTile<int>(
                 title: const Text('Low'),
                 value: 1,
-                groupValue: UserData.stress_level,
+                groupValue: _stress_level,
                 visualDensity: const VisualDensity(
                   horizontal: VisualDensity.minimumDensity,
                   vertical: VisualDensity.minimumDensity,
                 ),
                 onChanged: (int? value) {
                   setState(() {
-                    UserData.stress_level = value!;
+                    _stress_level = value!;
                   });
                 },
               ),
               RadioListTile<int>(
                 title: const Text('Medium'),
                 value: 2,
-                groupValue: UserData.stress_level,
+                groupValue: _stress_level,
                 visualDensity: const VisualDensity(
                   horizontal: VisualDensity.minimumDensity,
                   vertical: VisualDensity.minimumDensity,
                 ),
                 onChanged: (int? value) {
                   setState(() {
-                    UserData.stress_level = value!;
+                    _stress_level = value!;
                   });
                 },
               ),
               RadioListTile<int>(
                 title: const Text('High'),
                 value: 3,
-                groupValue: UserData.stress_level,
+                groupValue: _stress_level,
                 visualDensity: const VisualDensity(
                   horizontal: VisualDensity.minimumDensity,
                   vertical: VisualDensity.minimumDensity,
                 ),
                 onChanged: (int? value) {
                   setState(() {
-                    UserData.stress_level = value!;
+                    _stress_level = value!;
                   });
                 },
               ),
@@ -323,6 +333,19 @@ class _QuestionState extends State<Question> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       setState(() {
+                        UserData.due_date = _due_date;
+                        UserData.last_period = _last_period;
+                        UserData.weeks = DateTime.now().difference(_due_date!).inDays ~/ 7;
+                        UserData.days = DateTime.now().difference(_due_date!).inDays % 7;
+                        UserData.age = _age;
+                        UserData.weight = _weight;
+                        UserData.height = _height;
+                        UserData.bmi = _weight / ((_height / 100) * (_height / 100));
+                        UserData.systolic_blood_pressure = _systolic_blood_pressure;
+                        UserData.diastolic_blood_pressure = _diastolic_blood_pressure;
+                        UserData.sugar_level = _sugar_level;
+                        UserData.stress_level = _stress_level;
+
                         UserData.last_filled = DateTime.now();
                       });
                     }

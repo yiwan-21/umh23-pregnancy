@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Question extends StatefulWidget {
   const Question({super.key});
@@ -8,43 +9,22 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
-  final List<String> questions = [
-    'Question 1: How many people are in your household ?',
-    'Question 2: How long is the average shower time in your household ? (in minutes)',
-    'Question 3: How often do you take the bath per day ?',
-    'Question 4: How long do you leave your bathroom faucets running each day ? (in minutes)',
-    'Question 5: How long do you leave your kitchen faucets running each day ? (in minutes)',
-    'Question 6: How often do you wash your dishes each day ?',
-  ];
+  final _formKey = GlobalKey<FormState>();
+  String _title = '';
+  double _amount = 0;
+  DateTime _date = DateTime.now();
 
-  List<int> answers = List.filled(6, 0);
-
-  List<Widget> getQuestionList() {
-    List<Widget> questionList = [];
-    for (int i = 0; i < questions.length; i++) {
-      questionList.add(
-        ListTile(
-          title: Text(questions[i]),
-          subtitle: TextField(
-            keyboardType: TextInputType.number,
-            onChanged: (value) {
-              answers[i] = int.tryParse(value) ?? 0;
-            },
-          ),
-        ),
-      );
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2020),
+        lastDate: DateTime(2025));
+    if (picked != null) {
+      setState(() {
+        _date = picked;
+      });
     }
-    return questionList;
-  }
-
-  int calculateTotal() {
-    int total = 0;
-    int total2 = answers[1] * 3 * answers[2];
-    int total3 = (answers[3] + answers[4]) * 2;
-    int total4 = answers[5] * 20;
-    total = answers[0] * (total2 + total3 + total4);
-
-    return total;
   }
 
   @override
@@ -53,58 +33,94 @@ class _QuestionState extends State<Question> {
       appBar: AppBar(
         title: const Text('Questions'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: getQuestionList(),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              int total = calculateTotal();
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Total'),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('The total is $total Gallons'),
-                        if (total < 400) // add a conditional statement here
-                          const Text(
-                            'The water footprint is low! ',
-                            style: TextStyle(color: Colors.green),
-                          ),
-                        if (total >= 400 && total <= 600)
-                          const Text(
-                            'The water footprint is medium! ',
-                            style: TextStyle(color: Colors.yellow),
-                          ),
-                        if (total > 600)
-                          const Text(
-                            'The water footprint is high! ',
-                            style: TextStyle(color: Colors.red),
-                          ),
-                      ],
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
+      body: Container(
+        padding: const EdgeInsets.all(8.0), 
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Title',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your title';
+                  }
+                  return null;
                 },
-              );
-            },
-            child: const Text('Calculate Total'),
+                onChanged: (value) {
+                  setState(() {
+                    _title = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 20.0),
+              // date
+              TextFormField(
+                readOnly: true,
+                onTap: () {
+                  _selectDate(context);
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Date',
+                  suffixIcon: Icon(Icons.calendar_today),
+                ),
+                controller: TextEditingController(
+                  text: _date.toString().substring(0, 10),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Amount',
+                      ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}')),
+                      ],
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter an amount';
+                        }
+                        if (double.tryParse(value) == null) {
+                          return 'Please enter a valid amount';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          _amount = double.tryParse(value) == null
+                              ? 0
+                              : double.parse(value);
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              Container(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  child: const Text('Confirm'),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // Form is valid, do something
+                      _formKey.currentState!.save();
+                      // For example, submit the form to a server
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

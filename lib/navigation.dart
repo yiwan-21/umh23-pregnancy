@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './home.dart';
 import './question.dart';
+import './ultrasound.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -25,7 +26,8 @@ class _NavigationState extends State<Navigation> {
 
   final Map<String, Widget> _pages = {
     "Home": const Home(),
-    "Tracker": Question(),
+    "Tracker": const Question(),
+    "Ultrasound": const Ultrasound(),
   };
 
   @override
@@ -46,6 +48,10 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.question_answer_outlined),
             label: 'Question',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera_alt_outlined),
+            label: 'Ultrasound',
           ),
         ],
         onTap: _onItemTapped,

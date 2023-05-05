@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './custom_color.dart';
-import './navigation.dart';
-// import './home.dart';
-// import './question.dart';
+import 'custom_color.dart';
+import 'navigation.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './custom_color.dart';
 import './navigation.dart';
 // import './home.dart';
 // import './question.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: lightPink,
       ),
       routes: {
         '/': (context) => const Navigation(),

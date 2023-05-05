@@ -9,7 +9,7 @@ class TimeLine extends StatefulWidget {
 }
 
 class _TimeLineState extends State<TimeLine> {
-  final int _totalWeeks = 42;
+  final int _totalWeeks = 40;
   final double _tabWidth = 80;
   final Map<String, List> _events = {
     // event: [starting, duration, layer]
@@ -19,7 +19,7 @@ class _TimeLineState extends State<TimeLine> {
     'Third Ultrasound Scan': [30, 4, 1],
     'First Trimester': [1, 13, 4],
     'Second Trimester': [14, 13, 5],
-    'Third Trimester': [27, 16, 4],
+    'Third Trimester': [27, 14, 4],
   };
   final List<Color> _colors = [
     Colors.red,

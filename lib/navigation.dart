@@ -3,6 +3,7 @@ import 'home.dart';
 import 'question.dart';
 import 'ultrasound.dart';
 import 'necessities.dart';
+import 'community.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -28,6 +29,7 @@ class _NavigationState extends State<Navigation> {
   final Map<String, Widget> _pages = {
     "Home": const Home(),
     "Personal data": const Question(),
+    "Community": const Community(),
     "Ultrasound": const Ultrasound(),
     "Partner": Necessities(),
   };
@@ -50,6 +52,10 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.question_answer_outlined),
             label: 'Personal data',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people_alt_outlined),
+            label: 'Community',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt_outlined),

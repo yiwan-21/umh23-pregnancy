@@ -55,6 +55,7 @@ class _QuestionState extends State<Question> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Personal Data Questionnaire'),
+        centerTitle: true,
       ),
       body: Container(
         padding: const EdgeInsets.all(8.0),

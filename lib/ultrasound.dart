@@ -44,6 +44,7 @@ class _UltrasoundState extends State<Ultrasound> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Ultrasound'),
+          centerTitle: true,
         ),
         body: ListView(
           children: [

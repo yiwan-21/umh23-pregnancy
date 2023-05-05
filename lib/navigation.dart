@@ -27,7 +27,7 @@ class _NavigationState extends State<Navigation> {
 
   final Map<String, Widget> _pages = {
     "Home": const Home(),
-    "Tracker": const Question(),
+    "Personal data": const Question(),
     "Ultrasound": const Ultrasound(),
     "Partner": Necessities(),
   };
@@ -49,7 +49,7 @@ class _NavigationState extends State<Navigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.question_answer_outlined),
-            label: 'Question',
+            label: 'Personal data',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt_outlined),

@@ -19,29 +19,29 @@ class UserData {
   static String risk = '';
 
   static int no_of_pregnancy = 0;
-  static bool gestation_in_previous = false;
+  static int gestation_in_previous = 0; // boolean
   static int HDL = 0;
   // history of family members with diabetes
-  static bool family_history = false;
-  static bool unexplained_prenetal_loss = false;
-  static bool large_child_or_birth_default = false;
+  static int family_history = 0; // boolean
+  static int unexplained_prenetal_loss = 0; // boolean
+  static int large_child_or_birth_default = 0; // boolean
   // polycystic ovarian syndrome
-  static bool PCOS = false;
+  static int PCOS = 0; // boolean
   static double hemoglobin = 0;
-  static bool sedentary_lifestyle = false;
-  static bool prediabetes = false;
-  static bool dia_gdm = false;
+  static int sedentary_lifestyle = 0; // boolean
+  static int prediabetes = 0; // boolean
+  static int dia_gdm = 0; // boolean
 
-  static bool presentation_breech = false;
-  static bool presentation_cephalic = false;
-  static bool presentation_other = false;
-  static bool placenta_previa = false;
-  static bool amniotic_anhydramnios = false;
-  static bool amniotic_normal = false;
-  static bool hypertension_pih = false;
-  static bool hypertension_nil = false;
-  static bool diabetes_gdm = false;
-  static bool diabetes_nil = false;
+  static int presentation_breech = 0; // boolean
+  static int presentation_cephalic = 0; // boolean
+  static int presentation_other = 0; // boolean
+  static int placenta_previa = 0; // boolean
+  static int amniotic_anhydramnios = 0; // boolean
+  static int amniotic_normal = 0; // boolean
+  static int hypertension_pih = 0; // boolean
+  static int hypertension_nil = 0; // boolean
+  static int diabetes_gdm = 0; // boolean
+  static int diabetes_nil = 0; // boolean
 
   static DateTime? last_filled;
 }

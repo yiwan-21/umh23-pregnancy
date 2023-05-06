@@ -20,6 +20,16 @@ class Other extends StatelessWidget {
     "Pets": const Pets(),
   };
 
+  final List<String> _images = [
+    'assets/images/ultrasound.png',
+    'assets/images/health risk.png',
+    'assets/images/diabetes.png',
+    'assets/images/fetus size.png',
+    'assets/images/mode of delivery.png',
+    'assets/images/necessities.png',
+    'assets/images/pets.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +43,7 @@ class Other extends StatelessWidget {
         child: GridView.count(
           crossAxisCount:
               MediaQuery.of(context).orientation == Orientation.portrait
-                  ? 4
+                  ? 3
                   : 6,
           children: _pages.entries.map((entry) {
             return InkWell(
@@ -43,14 +53,25 @@ class Other extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => entry.value),
                 );
               },
-              child: Card(
-                elevation: 3,
-                child: Center(
-                  child: Text(
+              child: Column(
+                children: [
+                  Card(
+                    elevation: 3,
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Image.asset(
+                        _images[_pages.keys.toList().indexOf(entry.key)],
+                        height: 80,
+                        width: 80,
+                      ),
+                    ),
+                  ),
+                  Text(
                     entry.key,
                     textAlign: TextAlign.center,
                   ),
-                ),
+                ],
               ),
             );
           }).toList(),

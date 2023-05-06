@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'custom_color.dart';
 import 'navigation.dart';
 import 'timeline.dart';
+import 'care_plan.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Navigation(),
         '/timeline': (context) => const TimeLine(),
+        '/careplan': (context) => CarePlan(),
       },
     );
   }

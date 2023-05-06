@@ -12,16 +12,16 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   final _formKey = GlobalKey<FormState>();
-    static DateTime? _due_date = UserData.due_date;
-    static DateTime? _last_period = UserData.last_period;
-    static int _age = UserData.age;
-    static double _weight = UserData.weight;
-    static double _height = UserData.height;
-    // blood pressure = systolic/diastolic
-    static int _systolic_blood_pressure = UserData.systolic_blood_pressure;
-    static int _diastolic_blood_pressure = UserData.diastolic_blood_pressure; 
-    static int _sugar_level = UserData.sugar_level; // mg/DL
-    static int _stress_level = UserData.stress_level;
+  static DateTime? _due_date = UserData.due_date;
+  static DateTime? _last_period = UserData.last_period;
+  static int _age = UserData.age;
+  static double _weight = UserData.weight;
+  static double _height = UserData.height;
+  // blood pressure = systolic/diastolic
+  static int _systolic_blood_pressure = UserData.systolic_blood_pressure;
+  static int _diastolic_blood_pressure = UserData.diastolic_blood_pressure;
+  static int _sugar_level = UserData.sugar_level; // mg/DL
+  static int _stress_level = UserData.stress_level;
 
   Future<void> _selectDueDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -63,6 +63,13 @@ class _QuestionState extends State<Question> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
+              if (UserData.last_filled != null)
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/careplan');
+                  },
+                  child: const Text("View your personalized care plan"),
+                ),
               TextFormField(
                 readOnly: true,
                 decoration: const InputDecoration(
@@ -79,7 +86,9 @@ class _QuestionState extends State<Question> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      child: const Text('Estimated Due Date',),
+                      child: const Text(
+                        'Estimated Due Date',
+                      ),
                       onPressed: () {
                         _selectDueDate(context);
                       },
@@ -90,7 +99,9 @@ class _QuestionState extends State<Question> {
                   ),
                   Expanded(
                     child: ElevatedButton(
-                      child: const Text('Last Period Date',),
+                      child: const Text(
+                        'Last Period Date',
+                      ),
                       onPressed: () {
                         _selectLastPeriod(context);
                       },
@@ -104,11 +115,9 @@ class _QuestionState extends State<Question> {
                 decoration: const InputDecoration(
                   labelText: 'Age',
                 ),
-                keyboardType:
-                    const TextInputType.numberWithOptions(),
+                keyboardType: const TextInputType.numberWithOptions(),
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'^\d+')),
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+')),
                 ],
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -121,9 +130,7 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    _age = int.tryParse(value) == null
-                        ? 0
-                        : int.parse(value);
+                    _age = int.tryParse(value) == null ? 0 : int.parse(value);
                   });
                 },
               ),
@@ -136,8 +143,7 @@ class _QuestionState extends State<Question> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'^\d+\.?\d{0,2}')),
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -165,8 +171,7 @@ class _QuestionState extends State<Question> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'^\d+\.?\d{0,2}')),
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -187,16 +192,16 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: _systolic_blood_pressure == 0 ? '' : _systolic_blood_pressure.toString(),
+                initialValue: _systolic_blood_pressure == 0
+                    ? ''
+                    : _systolic_blood_pressure.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Systolic Blood Pressure (mmHg)',
                   hintText: 'Upper number',
                 ),
-                keyboardType:
-                    const TextInputType.numberWithOptions(),
+                keyboardType: const TextInputType.numberWithOptions(),
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'^\d+')),
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+')),
                 ],
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -209,24 +214,23 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    _systolic_blood_pressure = int.tryParse(value) == null
-                        ? 0
-                        : int.parse(value);
+                    _systolic_blood_pressure =
+                        int.tryParse(value) == null ? 0 : int.parse(value);
                   });
                 },
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: _diastolic_blood_pressure == 0 ? '' : _diastolic_blood_pressure.toString(),
+                initialValue: _diastolic_blood_pressure == 0
+                    ? ''
+                    : _diastolic_blood_pressure.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Diastolic Blood Pressure (mmHg)',
                   hintText: 'Lower number',
                 ),
-                keyboardType:
-                    const TextInputType.numberWithOptions(),
+                keyboardType: const TextInputType.numberWithOptions(),
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'^\d+')),
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+')),
                 ],
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -239,9 +243,8 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    _diastolic_blood_pressure = int.tryParse(value) == null
-                        ? 0
-                        : int.parse(value);
+                    _diastolic_blood_pressure =
+                        int.tryParse(value) == null ? 0 : int.parse(value);
                   });
                 },
               ),
@@ -251,11 +254,9 @@ class _QuestionState extends State<Question> {
                 decoration: const InputDecoration(
                   labelText: 'Sugar Level (mg/DL)',
                 ),
-                keyboardType:
-                    const TextInputType.numberWithOptions(),
+                keyboardType: const TextInputType.numberWithOptions(),
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'^\d+')),
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+')),
                 ],
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -268,9 +269,8 @@ class _QuestionState extends State<Question> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    _sugar_level = int.tryParse(value) == null
-                        ? 0
-                        : int.parse(value);
+                    _sugar_level =
+                        int.tryParse(value) == null ? 0 : int.parse(value);
                   });
                 },
               ),
@@ -327,7 +327,7 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               Container(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.center,
                 child: ElevatedButton(
                   child: const Text('Confirm'),
                   onPressed: () {
@@ -336,19 +336,25 @@ class _QuestionState extends State<Question> {
                       setState(() {
                         UserData.due_date = _due_date;
                         UserData.last_period = _last_period;
-                        UserData.weeks = DateTime.now().difference(_due_date!).inDays ~/ 7;
-                        UserData.days = DateTime.now().difference(_due_date!).inDays % 7;
+                        UserData.weeks =
+                            DateTime.now().difference(_due_date!).inDays ~/ 7;
+                        UserData.days =
+                            DateTime.now().difference(_due_date!).inDays % 7;
                         UserData.age = _age;
                         UserData.weight = _weight;
                         UserData.height = _height;
-                        UserData.bmi = _weight / ((_height / 100) * (_height / 100));
-                        UserData.systolic_blood_pressure = _systolic_blood_pressure;
-                        UserData.diastolic_blood_pressure = _diastolic_blood_pressure;
+                        UserData.bmi =
+                            _weight / ((_height / 100) * (_height / 100));
+                        UserData.systolic_blood_pressure =
+                            _systolic_blood_pressure;
+                        UserData.diastolic_blood_pressure =
+                            _diastolic_blood_pressure;
                         UserData.sugar_level = _sugar_level;
                         UserData.stress_level = _stress_level;
 
                         UserData.last_filled = DateTime.now();
                       });
+                      Navigator.pushNamed(context, '/careplan');
                     }
                   },
                 ),

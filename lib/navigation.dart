@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'question.dart';
-import 'ultrasound.dart';
-import 'necessities.dart';
 import 'community.dart';
+import 'other.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -28,10 +27,9 @@ class _NavigationState extends State<Navigation> {
 
   final Map<String, Widget> _pages = {
     "Home": const Home(),
-    "Personal data": const Question(),
+    "Personal": const Question(),
     "Community": const Community(),
-    "Ultrasound": const Ultrasound(),
-    "Partner": Necessities(),
+    "Other": Other(),
   };
 
   @override
@@ -51,19 +49,15 @@ class _NavigationState extends State<Navigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.question_answer_outlined),
-            label: 'Personal data',
+            label: 'Personal',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people_alt_outlined),
             label: 'Community',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt_outlined),
-            label: 'Ultrasound',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Necessities',
+            icon: Icon(Icons.more_horiz_outlined),
+            label: 'Other',
           ),
         ],
         onTap: _onItemTapped,

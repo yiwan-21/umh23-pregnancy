@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'ultrasound.dart';
 import 'health_risk.dart';
 import 'diabetes.dart';
+import 'fetus_size.dart';
 import 'mode_delivery.dart';
 import 'necessities.dart';
 import 'pets.dart';
@@ -13,6 +14,7 @@ class Other extends StatelessWidget {
     "Ultrasound": const Ultrasound(),
     "Health Risk": const HealthRisk(),
     "Diabetes": const Diabetes(),
+    "Fetus Size": FetusSize(),
     "Mode of Delivery": const ModeDelivery(),
     "Necessities": Necessities(),
     "Pets": const Pets(),

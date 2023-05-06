@@ -42,6 +42,7 @@ class UserData {
   static int hypertension_nil = 0; // boolean
   static int diabetes_gdm = 0; // boolean
   static int diabetes_nil = 0; // boolean
+  static String mode_delivery = '';
 
   static DateTime? last_filled;
 }

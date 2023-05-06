@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'question.dart';
 import 'community.dart';
+import 'nutrition.dart';
 import 'other.dart';
 
 class Navigation extends StatefulWidget {
@@ -29,6 +30,7 @@ class _NavigationState extends State<Navigation> {
     "Home": const Home(),
     "Personal": const Question(),
     "Community": const Community(),
+    "Nutrition": const Nutrition(),
     "Other": Other(),
   };
 
@@ -54,6 +56,10 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.people_alt_outlined),
             label: 'Community',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_dining_outlined),
+            label: 'Nutrition',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz_outlined),

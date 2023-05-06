@@ -132,46 +132,44 @@ class CarePlanCard extends StatefulWidget {
 class _CarePlanCardState extends State<CarePlanCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-      child: Card(
-        color: Colors.amber[50],
-        child: Container(
-          alignment: Alignment.centerLeft,
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+      color: Colors.amber[50],
+      child: Container(
+        alignment: Alignment.centerLeft,
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 10),
-              for (var i = 0; i < widget.solution.length; i++)
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.check,
-                      color: Colors.green,
-                      size: 15,
-                    ),
-                    const SizedBox(width: 5),
-                    Expanded(
-                      child: Text(
-                        widget.solution[i],
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
+            ),
+            const SizedBox(height: 10),
+            for (var i = 0; i < widget.solution.length; i++)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.check,
+                    color: Colors.green,
+                    size: 15,
+                  ),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: Text(
+                      widget.solution[i],
+                      style: const TextStyle(
+                        fontSize: 15,
                       ),
                     ),
-                  ],
-                ),
-            ],
-          ),
+                  ),
+                ],
+              ),
+          ],
         ),
       ),
     );

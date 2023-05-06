@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'ultrasound.dart';
+import 'health_risk.dart';
+import 'diabetes.dart';
 import 'necessities.dart';
+import 'pets.dart';
 
 class Other extends StatelessWidget {
   Other({super.key});
 
   final Map<String, Widget> _pages = {
     "Ultrasound": const Ultrasound(),
+    "Health Risk": const HealthRisk(),
+    "Diabetes": const Diabetes(),
     "Necessities": Necessities(),
+    "Pets": const Pets(),
   };
 
   @override
@@ -21,7 +27,7 @@ class Other extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: GridView.count(
-          crossAxisCount: 4,
+          crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 4 : 6,
           children: _pages.entries.map((entry) {
             return InkWell(
               onTap: () {

@@ -1,16 +1,12 @@
 # pregnancy_app
 
-A new Flutter project.
+Import the entire file into your IDE/VS CODE.
+Launch the Android Emulator and debug your code.
+Wait for the Flutter application to load on the emulator and access the dashboard.
+Use the three functionalities: Diabetes, Mode of Delivery, and Health Risk.
+Run the respective Python Flask backend file located in /backend.
+Make sure to modify the URL link in your Flutter code (health_risk.dart, diabetes.dart, mode_delivery.dart) to match the one provided by Python Flask.
+Click submit to see the model's prediction.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Extra: Run the python flask backend code(.py) and an IP address will be given (paste it in line url code in .dart file with same port)

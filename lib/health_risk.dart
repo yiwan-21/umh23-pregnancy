@@ -271,6 +271,7 @@ class _HealthRiskState extends State<HealthRisk> {
                         UserData.sugar_level = _sugar_level;
                         UserData.temperature = _temperature;
                         UserData.heart_rate = _heart_rate;
+                        UserData.stress_level = _stress_level;
                       });
 
                       var userInputs = {

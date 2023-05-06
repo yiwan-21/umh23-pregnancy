@@ -42,7 +42,7 @@ class _NutritionState extends State<Nutrition> {
       ),
       body: Form(
         key: _formKey,
-        child: Column(
+        child: ListView(
           children: [
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -128,7 +128,7 @@ class _NutritionState extends State<Nutrition> {
                 const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (_foodIntake.isNotEmpty) {
                       _formKey.currentState!.save();
                       final Map<String, double> nutrition = _handleSubmit();
                       Navigator.push(
@@ -138,6 +138,13 @@ class _NutritionState extends State<Nutrition> {
                             food: _food,
                             nutrition: nutrition,
                           ),
+                        ),
+                      );
+                    }
+                    else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please add at least a food'),
                         ),
                       );
                     }

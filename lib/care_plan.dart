@@ -86,6 +86,43 @@ class CarePlan extends StatelessWidget {
                 ),
               ),
             ),
+
+          if (UserData.dia_gdm != '')
+            Card(
+              margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                color: UserData.dia_gdm == 'GDM'
+                    ? Colors.redAccent[100]
+                    : Colors.greenAccent[100],
+                child: Text(
+                  UserData.dia_gdm,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
+          if (UserData.mode_delivery != '')
+            Card(
+              margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                color: Colors.greenAccent[100],
+                child: Text(
+                  UserData.mode_delivery,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
           if (UserData.age > 50)
             CarePlanCard(
               title: "Age",

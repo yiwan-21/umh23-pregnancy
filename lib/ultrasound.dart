@@ -71,7 +71,8 @@ class _UltrasoundState extends State<Ultrasound> {
                 ),
               ),
               icon: const Icon(
-                Icons.add_a_photo,
+                Icons.camera_alt,
+                color: Colors.red,
               ),
             ),
             TextButton.icon(
@@ -82,7 +83,10 @@ class _UltrasoundState extends State<Ultrasound> {
                   color: Colors.black,
                 ),
               ),
-              icon: const Icon(Icons.image),
+              icon: const Icon(
+                Icons.image,
+                color: Colors.red,
+              ),
             ),
           ],
         ));

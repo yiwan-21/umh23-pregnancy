@@ -205,7 +205,7 @@ class _ModeDeliveryState extends State<ModeDelivery> {
                   ],
                 ),
               ),
-              
+
               const SizedBox(height: 20.0),
               Container(
                 alignment: Alignment.center,
@@ -217,42 +217,74 @@ class _ModeDeliveryState extends State<ModeDelivery> {
                       setState(() {
                         UserData.age = _age;
                         UserData.height = _height;
-                        UserData.presentation_breech = _presentation_breech ? 1 : 0;
+                        UserData.presentation_breech =
+                            _presentation_breech ? 1 : 0;
                         UserData.presentation_cephalic =
                             _presentation_cephalic ? 1 : 0;
-                        UserData.presentation_other = _presentation_other ? 1 : 0;
+                        UserData.presentation_other =
+                            _presentation_other ? 1 : 0;
                         UserData.placenta_previa = _placenta_previa ? 1 : 0;
                         UserData.amniotic_normal = _amniotic_normal ? 1 : 0;
-                        UserData.amniotic_anhydramnios = !_amniotic_normal ? 1 : 0;
+                        UserData.amniotic_anhydramnios =
+                            !_amniotic_normal ? 1 : 0;
                         UserData.hypertension_nil = _hypertension_nil ? 1 : 0;
                         UserData.hypertension_pih = !_hypertension_nil ? 1 : 0;
                         UserData.diabetes_nil = _diabetes_nil ? 1 : 0;
                         UserData.diabetes_gdm = !_diabetes_nil ? 1 : 0;
                       });
-                        var userInputs = {
-                              'mum_age': _age,
-                              'mum_height': _height,
-                              'presentation_breech': _presentation_breech,
-                              'presentation_cephalic': _presentation_cephalic,
-                              'presentation_other': _presentation_other,
-                              'placenta_site_previa': _placenta_previa,
-                              'amniotic_anhydramnios': !_amniotic_normal,
-                              'amniotic_normal': !_amniotic_normal,
-                              'hypertension_nil': _hypertension_nil,
-                              'hypertension_pih': !_hypertension_nil,
-                              'diabetes_gdm': !_diabetes_nil,
-                              'diabetes_nil': _diabetes_nil
-                        };
+                      var userInputs = {
+                        'mum_age': _age,
+                        'mum_height': _height,
+                        'presentation_breech': _presentation_breech,
+                        'presentation_cephalic': _presentation_cephalic,
+                        'presentation_other': _presentation_other,
+                        'placenta_site_previa': _placenta_previa,
+                        'amniotic_anhydramnios': !_amniotic_normal,
+                        'amniotic_normal': !_amniotic_normal,
+                        'hypertension_nil': _hypertension_nil,
+                        'hypertension_pih': !_hypertension_nil,
+                        'diabetes_gdm': !_diabetes_nil,
+                        'diabetes_nil': _diabetes_nil
+                      };
                       var jsonData = jsonEncode(userInputs);
                       // Send a POST request to the Flask server with the user input data
-                      var url = 'http://10.164.38.230:8080/mode';
+                      var url = 'http://10.164.38.225:8080/mode';
                       var headers = {'Content-Type': 'application/json'};
                       var response = await http.post(Uri.parse(url),
                           headers: headers, body: jsonData);
 
                       UserData.mode_delivery = jsonDecode(response.body);
-                      print(UserData.mode_delivery);
 
+                      showDialog(
+                          context: context,
+                          builder: ((context) {
+                            return AlertDialog(
+                              title: const Text("Your data has been saved!"),
+                              content: const Text(
+                                  "Do you want to have a look on your personalized care plan?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    "No",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(context, '/careplan');
+                                  },
+                                  child: const Text(
+                                    "Yes",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }));
                     }
                   },
                 ),

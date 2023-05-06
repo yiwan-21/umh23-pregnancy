@@ -212,10 +212,12 @@ class _DiabetesState extends State<Diabetes> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Gestation in Previous'),
                     const SizedBox(width: 20),
                     Switch(
+                      activeColor: Colors.red,
                       value: _gestation_in_previous,
                       onChanged: (value) {
                         setState(() {
@@ -229,10 +231,12 @@ class _DiabetesState extends State<Diabetes> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Family History of Diabetes'),
                     const SizedBox(width: 20),
                     Switch(
+                      activeColor: Colors.red,
                       value: _family_history,
                       onChanged: (value) {
                         setState(() {
@@ -246,10 +250,12 @@ class _DiabetesState extends State<Diabetes> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Unexplained Prenatal Loss'),
                     const SizedBox(width: 20),
                     Switch(
+                      activeColor: Colors.red,
                       value: _unexplained_prenetal_loss,
                       onChanged: (value) {
                         setState(() {
@@ -263,10 +269,12 @@ class _DiabetesState extends State<Diabetes> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Large Child or Birth Default'),
                     const SizedBox(width: 20),
                     Switch(
+                      activeColor: Colors.red,
                       value: _large_child_or_birth_default,
                       onChanged: (value) {
                         setState(() {
@@ -280,10 +288,12 @@ class _DiabetesState extends State<Diabetes> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Polycystic Ovarian Syndrome (PCOS)'),
                     const SizedBox(width: 20),
                     Switch(
+                      activeColor: Colors.red,
                       value: _PCOS,
                       onChanged: (value) {
                         setState(() {
@@ -297,10 +307,12 @@ class _DiabetesState extends State<Diabetes> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Sedentary Lifestyle'),
                     const SizedBox(width: 20),
                     Switch(
+                      activeColor: Colors.red,
                       value: _sedentary_lifestyle,
                       onChanged: (value) {
                         setState(() {
@@ -314,10 +326,12 @@ class _DiabetesState extends State<Diabetes> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Prediabetes'),
                     const SizedBox(width: 20),
                     Switch(
+                      activeColor: Colors.red,
                       value: _prediabetes,
                       onChanged: (value) {
                         setState(() {
@@ -375,13 +389,43 @@ class _DiabetesState extends State<Diabetes> {
                       };
                       var jsonData = jsonEncode(userInputs);
                       // Send a POST request to the Flask server with the user input data
-                      var url = 'http://10.164.38.230:8080/gestation';
+                      var url = 'http://10.164.38.225:8080/gestation';
                       var headers = {'Content-Type': 'application/json'};
                       var response = await http.post(Uri.parse(url),
                           headers: headers, body: jsonData);
 
                       UserData.dia_gdm = jsonDecode(response.body);
-                      print(UserData.dia_gdm);
+                      
+                      showDialog(
+                          context: context,
+                          builder: ((context) {
+                            return AlertDialog(
+                              title: const Text("Your data has been saved!"),
+                              content: const Text(
+                                  "Do you want to have a look on your personalized care plan?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    "No",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(context, '/careplan');
+                                  },
+                                  child: const Text(
+                                    "Yes",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }));
                     }
                   },
                 ),

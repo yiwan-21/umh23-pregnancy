@@ -12,6 +12,10 @@ class UserData {
   static int diastolic_blood_pressure = 0; 
   static int sugar_level = 0; // mg/DL
   static int stress_level = 0;
+  static double temperature = 0;
+  static int heart_rate = 0;
+  // high risk, medium risk, low risk
+  static String risk = '';
 
   static DateTime? last_filled;
 }

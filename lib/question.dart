@@ -12,16 +12,16 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   final _formKey = GlobalKey<FormState>();
-  static DateTime? _due_date = UserData.due_date;
-  static DateTime? _last_period = UserData.last_period;
-  static int _age = UserData.age;
-  static double _weight = UserData.weight;
-  static double _height = UserData.height;
+  DateTime? _due_date = UserData.due_date;
+  DateTime? _last_period = UserData.last_period;
+  int _age = UserData.age;
+  double _weight = UserData.weight;
+  double _height = UserData.height;
   // blood pressure = systolic/diastolic
-  static int _systolic_blood_pressure = UserData.systolic_blood_pressure;
-  static int _diastolic_blood_pressure = UserData.diastolic_blood_pressure;
-  static int _sugar_level = UserData.sugar_level; // mg/DL
-  static int _stress_level = UserData.stress_level;
+  int _systolic_blood_pressure = UserData.systolic_blood_pressure;
+  int _diastolic_blood_pressure = UserData.diastolic_blood_pressure;
+  int _sugar_level = UserData.sugar_level; // mg/DL
+  int _stress_level = UserData.stress_level;
 
   Future<void> _selectDueDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -63,15 +63,6 @@ class _QuestionState extends State<Question> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              if (UserData.last_filled != null)
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/careplan');
-                  },
-                  child: const Text("View your personalized care plan"),
-                ),
-              if (UserData.last_filled != null)
-                const Divider(),
               TextFormField(
                 readOnly: true,
                 decoration: const InputDecoration(
@@ -287,6 +278,7 @@ class _QuestionState extends State<Question> {
               ),
               RadioListTile<int>(
                 title: const Text('Low'),
+                activeColor: Colors.red,
                 value: 1,
                 groupValue: _stress_level,
                 visualDensity: const VisualDensity(
@@ -301,6 +293,7 @@ class _QuestionState extends State<Question> {
               ),
               RadioListTile<int>(
                 title: const Text('Medium'),
+                activeColor: Colors.red,
                 value: 2,
                 groupValue: _stress_level,
                 visualDensity: const VisualDensity(
@@ -315,6 +308,7 @@ class _QuestionState extends State<Question> {
               ),
               RadioListTile<int>(
                 title: const Text('High'),
+                activeColor: Colors.red,
                 value: 3,
                 groupValue: _stress_level,
                 visualDensity: const VisualDensity(
@@ -356,30 +350,25 @@ class _QuestionState extends State<Question> {
 
                         UserData.last_filled = DateTime.now();
                       });
-                      showDialog(context: context, builder: 
-                        (BuildContext context) {
-                        // ask to navigate or not
-                         return AlertDialog(
-                          title: const Text("Your data has been saved!"),
-                          content: const Text("Do you want to have a look on your personalized care plan?"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text("No"),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.pushNamed(context, '/careplan');
-                              },
-                              child: const Text("Yes"),
-                            ),
-                          ],
-                         );
-                        }
-                      );
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            // ask to navigate or not
+                            return AlertDialog(
+                              title: const Text("Your data has been saved!"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    "Ok",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ],
+                            );
+                          });
                     }
                   },
                 ),

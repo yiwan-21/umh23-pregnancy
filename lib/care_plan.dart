@@ -66,6 +66,26 @@ class CarePlan extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          if (UserData.risk != '')
+            Card(
+              margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                color: UserData.risk == 'high risk'
+                    ? Colors.redAccent[100]
+                    : UserData.risk == 'medium risk'
+                        ? Colors.amberAccent[100]
+                        : Colors.greenAccent[100],
+                child: Text(
+                  UserData.risk.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           if (UserData.age > 50)
             CarePlanCard(
               title: "Age",

@@ -30,7 +30,7 @@ class UserData {
   static double hemoglobin = 0;
   static int sedentary_lifestyle = 0; // boolean
   static int prediabetes = 0; // boolean
-  static int dia_gdm = 0; // boolean
+  static String dia_gdm = ''; // boolean
 
   static int presentation_breech = 0; // boolean
   static int presentation_cephalic = 0; // boolean

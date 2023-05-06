@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'user_data.dart';
 
@@ -331,7 +333,7 @@ class _DiabetesState extends State<Diabetes> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   child: const Text('Confirm'),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       setState(() {
@@ -354,6 +356,32 @@ class _DiabetesState extends State<Diabetes> {
                         UserData.sedentary_lifestyle = _sedentary_lifestyle ? 1 : 0;
                         UserData.prediabetes = _prediabetes ? 1 : 0;
                       });
+
+                      var userInputs = {
+                        'Age': _age,
+                        'No of Pregnancy': _systolic_blood_pressure,
+                        'Gestation in previous Pregnancy': _diastolic_blood_pressure,
+                        'BMI': UserData.bmi,
+                        'HDL': _HDL,
+                        'Family History': _family_history,
+                        'unexplained prenetal loss': _unexplained_prenetal_loss,
+                        'Large Child or Birth Default': _large_child_or_birth_default,
+                        'PCOS': _PCOS,
+                        'Sys BP': _systolic_blood_pressure,
+                        'Dia BP': _diastolic_blood_pressure,
+                        'Hemoglobin': _hemoglobin,
+                        'Sedentary Lifestyle': _sedentary_lifestyle,
+                        'Prediabetes': _prediabetes
+                      };
+                      var jsonData = jsonEncode(userInputs);
+                      // Send a POST request to the Flask server with the user input data
+                      var url = 'http://10.164.38.230:8080/gestation';
+                      var headers = {'Content-Type': 'application/json'};
+                      var response = await http.post(Uri.parse(url),
+                          headers: headers, body: jsonData);
+
+                      UserData.dia_gdm = jsonDecode(response.body);
+                      print(UserData.dia_gdm);
                     }
                   },
                 ),

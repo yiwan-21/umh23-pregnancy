@@ -42,28 +42,32 @@ class Home extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 20),
                   child: CustomPaint(
                     painter: CustomCircularProgress(
-                      value: UserData.last_filled == null ? 0 : UserData.weeks / 40,
+                      value: UserData.last_filled == null
+                          ? 0
+                          : UserData.weeks / 40,
                     ),
                     child: UserData.last_filled == null
-                    ? Container()
-                    : Center(
-                      child: CircleAvatar(
-                        radius: 65,
-                        // use the function getImage()
-                        backgroundImage: AssetImage(getImage(UserData.weeks)),
-                      ),
-                    ),
+                        ? Container()
+                        : Center(
+                            child: CircleAvatar(
+                              radius: 65,
+                              // use the function getImage()
+                              backgroundImage:
+                                  AssetImage(getImage(UserData.weeks)),
+                            ),
+                          ),
                   ),
                 ),
                 UserData.last_filled == null
-                ? const Text("Please fill in complete your Personal Questionnaire to get started")
-                : Text(
-                    "Week ${UserData.weeks} / Days ${UserData.days}",
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                    ? const Text(
+                        "Please fill in complete your Personal Questionnaire to get started")
+                    : Text(
+                        "Week ${UserData.weeks} / Days ${UserData.days}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                 const SizedBox(height: 15),
               ],
             ),
@@ -88,25 +92,94 @@ class Home extends StatelessWidget {
                     const Image(
                       height: 100,
                       width: 400,
-                      image: NetworkImage(
-                        "https://img.freepik.com/free-vector/hand-drawn-fetus-illustration_23-2149205952.jpg?w=740&t=st=1683280539~exp=1683281139~hmac=5ab7d4dc7c8df9743624594421cfe81957330152991e379e3145dbbb3fb682a1",
-                      ),
+                      image: AssetImage(
+                          'assets/images/hand-drawn-fetus-illustration.png'),
                       fit: BoxFit.cover,
                     ),
+                    const Divider(height: 0, thickness: 1, color: Colors.black26),
                     Container(
                       padding: const EdgeInsets.all(20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
                           Text(
-                            "Timeline",
+                            "View Pregnancy Timeline",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Icon(Icons.arrow_forward_ios),
                         ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: GestureDetector(
+              onTap: () {
+                if (UserData.risk != '') {
+                  Navigator.pushNamed(context, '/careplan');
+                }
+              },
+              child: Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    const Image(
+                      height: 100,
+                      width: 400,
+                      image: AssetImage('assets/images/careplan.jpg'),
+                      alignment: Alignment(0, -0.2),
+                      fit: BoxFit.cover,
+                    ),
+                    const Divider(height: 0, thickness: 1, color: Colors.black26),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  color: UserData.risk == '' ? Colors.black12 : Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Your Personalized Care Plan",
+                            style: TextStyle(
+                              color: UserData.risk == ''
+                                  ? Colors.black54
+                                  : Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Icon(Icons.arrow_forward_ios),
+                        ],
+                      ),
+                    ),
+                    const Divider(height: 0, thickness: 1, color: Colors.black26),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        "You can view your personalized care plan after completing the Health Risk questionnaire in the 'Other' tab",
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
                       ),
                     )
                   ],
@@ -123,8 +196,7 @@ class Home extends StatelessWidget {
 class CustomCircularProgress extends CustomPainter {
   final double value;
 
-  CustomCircularProgress(
-      {required this.value});
+  CustomCircularProgress({required this.value});
 
   @override
   void paint(Canvas canvas, Size size) {

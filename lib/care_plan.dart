@@ -149,6 +149,7 @@ class _CarePlanCardState extends State<CarePlanCard> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 10),
               for (var i = 0; i < widget.solution.length; i++)
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

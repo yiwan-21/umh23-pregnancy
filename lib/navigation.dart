@@ -48,7 +48,7 @@ class _NavigationState extends State<Navigation> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.question_answer_outlined),
+            icon: Icon(Icons.article_outlined),
             label: 'Personal',
           ),
           BottomNavigationBarItem(

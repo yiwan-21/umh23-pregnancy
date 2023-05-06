@@ -70,6 +70,8 @@ class _QuestionState extends State<Question> {
                   },
                   child: const Text("View your personalized care plan"),
                 ),
+              if (UserData.last_filled != null)
+                const Divider(),
               TextFormField(
                 readOnly: true,
                 decoration: const InputDecoration(
@@ -111,7 +113,7 @@ class _QuestionState extends State<Question> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
-                initialValue: _height == 0 ? '' : _height.toString(),
+                initialValue: _age == 0 ? '' : _age.toString(),
                 decoration: const InputDecoration(
                   labelText: 'Age',
                 ),
@@ -337,9 +339,9 @@ class _QuestionState extends State<Question> {
                         UserData.due_date = _due_date;
                         UserData.last_period = _last_period;
                         UserData.weeks =
-                            DateTime.now().difference(_due_date!).inDays ~/ 7;
+                            _due_date!.difference(DateTime.now()).inDays ~/ 7;
                         UserData.days =
-                            DateTime.now().difference(_due_date!).inDays % 7;
+                            _due_date!.difference(DateTime.now()).inDays;
                         UserData.age = _age;
                         UserData.weight = _weight;
                         UserData.height = _height;
@@ -354,7 +356,30 @@ class _QuestionState extends State<Question> {
 
                         UserData.last_filled = DateTime.now();
                       });
-                      Navigator.pushNamed(context, '/careplan');
+                      showDialog(context: context, builder: 
+                        (BuildContext context) {
+                        // ask to navigate or not
+                         return AlertDialog(
+                          title: const Text("Your data has been saved!"),
+                          content: const Text("Do you want to have a look on your personalized care plan?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.pushNamed(context, '/careplan');
+                              },
+                              child: const Text("Yes"),
+                            ),
+                          ],
+                         );
+                        }
+                      );
                     }
                   },
                 ),

@@ -14,13 +14,13 @@ class _ModeDeliveryState extends State<ModeDelivery> {
   final _formKey = GlobalKey<FormState>();
   int _age = UserData.age;
   double _height = UserData.height;
-  bool _presentation_breech = UserData.presentation_breech;
-  bool _presentation_cephalic = UserData.presentation_cephalic;
-  bool _presentation_other = UserData.presentation_other;
-  bool _placenta_previa = UserData.placenta_previa;
-  bool _amniotic_normal = UserData.amniotic_normal;
-  bool _hypertension_nil = UserData.hypertension_nil;
-  bool _diabetes_nil = UserData.diabetes_nil;
+  bool _presentation_breech = UserData.presentation_breech == 1;
+  bool _presentation_cephalic = UserData.presentation_cephalic == 1;
+  bool _presentation_other = UserData.presentation_other == 1;
+  bool _placenta_previa = UserData.placenta_previa == 1;
+  bool _amniotic_normal = UserData.amniotic_normal == 1;
+  bool _hypertension_nil = UserData.hypertension_nil == 1;
+  bool _diabetes_nil = UserData.diabetes_nil == 1;
 
   @override
   Widget build(BuildContext context) {
@@ -215,17 +215,17 @@ class _ModeDeliveryState extends State<ModeDelivery> {
                       setState(() {
                         UserData.age = _age;
                         UserData.height = _height;
-                        UserData.presentation_breech = _presentation_breech;
+                        UserData.presentation_breech = _presentation_breech ? 1 : 0;
                         UserData.presentation_cephalic =
-                            _presentation_cephalic;
-                        UserData.presentation_other = _presentation_other;
-                        UserData.placenta_previa = _placenta_previa;
-                        UserData.amniotic_normal = _amniotic_normal;
-                        UserData.amniotic_anhydramnios = !_amniotic_normal;
-                        UserData.hypertension_nil = _hypertension_nil;
-                        UserData.hypertension_pih = !_hypertension_nil;
-                        UserData.diabetes_nil = _diabetes_nil;
-                        UserData.diabetes_gdm = !_diabetes_nil;
+                            _presentation_cephalic ? 1 : 0;
+                        UserData.presentation_other = _presentation_other ? 1 : 0;
+                        UserData.placenta_previa = _placenta_previa ? 1 : 0;
+                        UserData.amniotic_normal = _amniotic_normal ? 1 : 0;
+                        UserData.amniotic_anhydramnios = !_amniotic_normal ? 1 : 0;
+                        UserData.hypertension_nil = _hypertension_nil ? 1 : 0;
+                        UserData.hypertension_pih = !_hypertension_nil ? 1 : 0;
+                        UserData.diabetes_nil = _diabetes_nil ? 1 : 0;
+                        UserData.diabetes_gdm = !_diabetes_nil ? 1 : 0;
                       });
                     }
                   },

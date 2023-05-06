@@ -17,17 +17,17 @@ class _DiabetesState extends State<Diabetes> {
   int _systolic_blood_pressure = UserData.systolic_blood_pressure;
   int _diastolic_blood_pressure = UserData.diastolic_blood_pressure;
   int _no_of_pregnancy = UserData.no_of_pregnancy;
-  bool _gestation_in_previous = UserData.gestation_in_previous;
+  bool _gestation_in_previous = UserData.gestation_in_previous == 1;
   int _HDL = UserData.HDL;
   // history of family members with diabetes
-  bool _family_history = UserData.family_history;
-  bool _unexplained_prenetal_loss = UserData.unexplained_prenetal_loss;
-  bool _large_child_or_birth_default = UserData.large_child_or_birth_default;
+  bool _family_history = UserData.family_history == 1;
+  bool _unexplained_prenetal_loss = UserData.unexplained_prenetal_loss == 1;
+  bool _large_child_or_birth_default = UserData.large_child_or_birth_default == 1;
   // polycystic ovarian syndrome
-  bool _PCOS = UserData.PCOS;
+  bool _PCOS = UserData.PCOS == 1;
   double _hemoglobin = UserData.hemoglobin;
-  bool _sedentary_lifestyle = UserData.sedentary_lifestyle;
-  bool _prediabetes = UserData.prediabetes;
+  bool _sedentary_lifestyle = UserData.sedentary_lifestyle == 1;
+  bool _prediabetes = UserData.prediabetes == 1;
 
   @override
   Widget build(BuildContext context) {
@@ -342,17 +342,17 @@ class _DiabetesState extends State<Diabetes> {
                             _diastolic_blood_pressure;
                         UserData.no_of_pregnancy = _no_of_pregnancy;
                         UserData.gestation_in_previous =
-                            _gestation_in_previous;
+                            _gestation_in_previous ? 1 : 0;
                         UserData.HDL = _HDL;
-                        UserData.family_history = _family_history;
+                        UserData.family_history = _family_history ? 1 : 0;
                         UserData.unexplained_prenetal_loss =
-                            _unexplained_prenetal_loss;
+                            _unexplained_prenetal_loss ? 1 : 0;
                         UserData.large_child_or_birth_default =
-                            _large_child_or_birth_default;
-                        UserData.PCOS = _PCOS;
+                            _large_child_or_birth_default ? 1 : 0;
+                        UserData.PCOS = _PCOS ? 1 : 0;
                         UserData.hemoglobin = _hemoglobin;
-                        UserData.sedentary_lifestyle = _sedentary_lifestyle;
-                        UserData.prediabetes = _prediabetes;
+                        UserData.sedentary_lifestyle = _sedentary_lifestyle ? 1 : 0;
+                        UserData.prediabetes = _prediabetes ? 1 : 0;
                       });
                     }
                   },

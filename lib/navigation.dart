@@ -19,11 +19,6 @@ class _NavigationState extends State<Navigation> {
     setState(() {
       _selectedIndex = index;
     });
-    switch (index) {
-      case 0:
-        break;
-      default:
-    }
   }
 
   final Map<String, Widget> _pages = {

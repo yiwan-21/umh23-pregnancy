@@ -30,6 +30,7 @@ class UserData {
   static double hemoglobin = 0;
   static bool sedentary_lifestyle = false;
   static bool prediabetes = false;
+  static bool dia_gdm = false;
 
   static bool presentation_breech = false;
   static bool presentation_cephalic = false;

@@ -8,19 +8,19 @@ class Home extends StatelessWidget {
   const Home({super.key});
 
   String getImage(int weeks) {
-    if (weeks <= 4) return "assets/images/W1.jpg";
-    if (weeks <= 7) return "assets/images/W4.jpg";
-    if (weeks <= 10) return "assets/images/W7.jpg";
-    if (weeks <= 14) return "assets/images/W10.jpg";
-    if (weeks <= 17) return "assets/images/W14.jpg";
-    if (weeks <= 20) return "assets/images/W17.jpg";
-    if (weeks <= 23) return "assets/images/W20.jpg";
-    if (weeks <= 26) return "assets/images/W23.jpg";
-    if (weeks <= 29) return "assets/images/W26.jpg";
-    if (weeks <= 33) return "assets/images/W29.jpg";
-    if (weeks <= 37) return "assets/images/W33.jpg";
-    if (weeks <= 40) return "assets/images/W37.jpg";
-    return "assets/images/W40.jpg";
+    if (weeks <= 4) return "assets/images/fetus/W1.jpg";
+    if (weeks <= 7) return "assets/images/fetus/W4.jpg";
+    if (weeks <= 10) return "assets/images/fetus/W7.jpg";
+    if (weeks <= 14) return "assets/images/fetus/W10.jpg";
+    if (weeks <= 17) return "assets/images/fetus/W14.jpg";
+    if (weeks <= 20) return "assets/images/fetus/W17.jpg";
+    if (weeks <= 23) return "assets/images/fetus/W20.jpg";
+    if (weeks <= 26) return "assets/images/fetus/W23.jpg";
+    if (weeks <= 29) return "assets/images/fetus/W26.jpg";
+    if (weeks <= 33) return "assets/images/fetus/W29.jpg";
+    if (weeks <= 37) return "assets/images/fetus/W33.jpg";
+    if (weeks <= 40) return "assets/images/fetus/W37.jpg";
+    return "assets/images/fetus/W40.jpg";
   }
 
   @override

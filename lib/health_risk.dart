@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'user_data.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class HealthRisk extends StatefulWidget {
   const HealthRisk({super.key});
@@ -257,7 +259,7 @@ class _HealthRiskState extends State<HealthRisk> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   child: const Text('Confirm'),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       setState(() {
@@ -270,6 +272,25 @@ class _HealthRiskState extends State<HealthRisk> {
                         UserData.temperature = _temperature;
                         UserData.heart_rate = _heart_rate;
                       });
+
+                      var userInputs = {
+                        'Age': _age,
+                        'SystolicBP': _systolic_blood_pressure,
+                        'DiastolicBP': _diastolic_blood_pressure,
+                        'BS': _sugar_level,
+                        'BodyTemp': _temperature,
+                        'HeartRate': _heart_rate
+                      };
+                      var jsonData = jsonEncode(userInputs);
+                      // Send a POST request to the Flask server with the user input data
+                      var url = 'http://10.164.38.225:8080/healthrisk';
+                      var headers = {'Content-Type': 'application/json'};
+                      var response = await http.post(Uri.parse(url),
+                          headers: headers, body: jsonData);
+
+                      // Process the response from the Flask server
+                      UserData.risk =
+                          jsonDecode(response.body)['predicted_risk'];
                       showDialog(
                           context: context,
                           builder: ((context) {

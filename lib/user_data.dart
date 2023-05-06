@@ -31,5 +31,16 @@ class UserData {
   static bool sedentary_lifestyle = false;
   static bool prediabetes = false;
 
+  static bool presentation_breech = false;
+  static bool presentation_cephalic = false;
+  static bool presentation_other = false;
+  static bool placenta_previa = false;
+  static bool amniotic_anhydramnios = false;
+  static bool amniotic_normal = false;
+  static bool hypertension_pih = false;
+  static bool hypertension_nil = false;
+  static bool diabetes_gdm = false;
+  static bool diabetes_nil = false;
+
   static DateTime? last_filled;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'ultrasound.dart';
 import 'health_risk.dart';
 import 'diabetes.dart';
+import 'mode_delivery.dart';
 import 'necessities.dart';
 import 'pets.dart';
 
@@ -12,6 +13,7 @@ class Other extends StatelessWidget {
     "Ultrasound": const Ultrasound(),
     "Health Risk": const HealthRisk(),
     "Diabetes": const Diabetes(),
+    "Mode of Delivery": const ModeDelivery(),
     "Necessities": Necessities(),
     "Pets": const Pets(),
   };
@@ -27,7 +29,10 @@ class Other extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: GridView.count(
-          crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 4 : 6,
+          crossAxisCount:
+              MediaQuery.of(context).orientation == Orientation.portrait
+                  ? 4
+                  : 6,
           children: _pages.entries.map((entry) {
             return InkWell(
               onTap: () {
@@ -39,7 +44,10 @@ class Other extends StatelessWidget {
               child: Card(
                 elevation: 3,
                 child: Center(
-                  child: Text(entry.key),
+                  child: Text(
+                    entry.key,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             );

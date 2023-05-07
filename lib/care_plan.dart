@@ -73,7 +73,7 @@ class CarePlan extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 color: UserData.risk == 'high risk'
                     ? Colors.redAccent[100]
-                    : UserData.risk == 'medium risk'
+                    : UserData.risk == 'mid risk'
                         ? Colors.amberAccent[100]
                         : Colors.greenAccent[100],
                 child: Text(

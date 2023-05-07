@@ -23,6 +23,9 @@ class _QuestionState extends State<Question> {
   int _sugar_level = UserData.sugar_level; // mg/DL
   int _stress_level = UserData.stress_level;
 
+  final int totalWeeks = 40;
+  final int totalDays = 280;
+
   Future<void> _selectDueDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -333,9 +336,9 @@ class _QuestionState extends State<Question> {
                         UserData.due_date = _due_date;
                         UserData.last_period = _last_period;
                         UserData.weeks =
-                            _due_date!.difference(DateTime.now()).inDays ~/ 7;
+                            totalWeeks - _due_date!.difference(DateTime.now()).inDays ~/ 7;
                         UserData.days =
-                            _due_date!.difference(DateTime.now()).inDays;
+                            totalDays - _due_date!.difference(DateTime.now()).inDays;
                         UserData.age = _age;
                         UserData.weight = _weight;
                         UserData.height = _height;

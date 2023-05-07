@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import accuracy_score
 from scipy import stats
 from sklearn.preprocessing import MinMaxScaler
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -20,12 +20,12 @@ df = pd.read_csv('backend/dataset_mod.csv')
 num_na_rows = df.isnull().sum(axis=1).astype(bool).sum()
 total_rows = df.shape[0]
 
-print('Number of N/A rows: {}'.format(num_na_rows))
-print('Number of total rows: {}'.format(total_rows))
+# print('Number of N/A rows: {}'.format(num_na_rows))
+# print('Number of total rows: {}'.format(total_rows))
 
 #remove N/A values
 df.dropna() 
-print('Number of records after removing N/A values: {}'.format(df.shape[0]))
+# print('Number of records after removing N/A values: {}'.format(df.shape[0]))
 
 # Calculate the z-scores for each data point
 # z_scores = np.abs((df - df.mean()) / df.std())
@@ -33,26 +33,26 @@ z_scores = np.abs(stats.zscore(df))
 # print(z_scores)
 
 # Plot the distribution of the z-scores to understand the outliers lied at in the distribution
-plt.hist(z_scores.values.flatten(), bins=20)
-plt.xlabel('Z-score')
-plt.ylabel('Frequency')
-plt.show()
+# plt.hist(z_scores.values.flatten(), bins=20)
+# plt.xlabel('Z-score')
+# plt.ylabel('Frequency')
+# plt.show()
 
 # Choose a threshold based on the distribution of the z-scores
 min_threshold = 2.5
 max_threshold = 5
-print('Number of rows after removing outliers using 4 std dev: {}'.format(df[(z_scores < min_threshold).all(axis=1)].shape[0]))
-print('Number of rows after removing outliers using 5 std dev: {}'.format(df[(z_scores < max_threshold).all(axis=1)].shape[0]))
-print('Number of rows that are within std dev 4 to 5: {}'.format(abs(df[(z_scores < min_threshold).all(axis=1)].shape[0]- df[(z_scores < max_threshold).all(axis=1)].shape[0])))
+# print('Number of rows after removing outliers using 4 std dev: {}'.format(df[(z_scores < min_threshold).all(axis=1)].shape[0]))
+# print('Number of rows after removing outliers using 5 std dev: {}'.format(df[(z_scores < max_threshold).all(axis=1)].shape[0]))
+# print('Number of rows that are within std dev 4 to 5: {}'.format(abs(df[(z_scores < min_threshold).all(axis=1)].shape[0]- df[(z_scores < max_threshold).all(axis=1)].shape[0])))
 
 df = df[(z_scores < min_threshold).all(axis=1)]
-print(df.shape[0])
+# print(df.shape[0])
 
 df_normalized = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
 df_normalized.head(20)
 
 X = df.drop(columns='delivery_mode', axis=1)
-print(X.shape)
+# print(X.shape)
 y = df['delivery_mode']
 
 # X = df_normalized.drop(columns='delivery_mode', axis=1)

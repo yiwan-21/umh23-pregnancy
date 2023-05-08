@@ -10,3 +10,10 @@ Click submit to see the model's prediction.
 
 
 Extra: Run the python flask backend code(.py) and an IP address will be given (paste it in line url code in .dart file with same port)
+
+<b>References</b>
+1. Health Risk Dataset - https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data
+2. Gestational Diabetes Dataset - https://www.kaggle.com/datasets/sumathisanthosh/gestational-diabetes-mellitus-gdm-data-set
+3. Food Nutrition Dataset - https://www.kaggle.com/datasets/shrutisaxena/food-nutrition-dataset
+
+
